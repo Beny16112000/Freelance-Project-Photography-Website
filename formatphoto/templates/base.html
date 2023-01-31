@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="{% static 'media/fav.png' %}" rel="icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<script>
+    // When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+<style>
+    header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ff9900;
+    color: #121A22;
+    padding: 20px;
+  }
+  
+  .header-title {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  nav {
+    display: flex;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+  }
+  
+  nav li {
+    margin-right: 10px;
+  }
+  
+  nav a {
+    color: #121A22;
+    text-decoration: none;
+  }
+  
+  nav a:hover {
+    color: #e6e6e5;
+  }
+</style>
+<body>
+    <header>
+  <nav>
+    <ul>
+      <li><a href="/manage/">Home</a></li>
+      <li><a href="/manage/about">About</a></li>
+      <li><a href="/manage/reviews">Reviews</a></li>
+      <li><a href="/manage/category">Category</a></li>
+      <li><a href="/manage/prices">Prices</a></li>
+      <li><a href="/manage/contact">Contact</a></li>
+    {% if user.is_authenticated %}
+      <li><a href="/manage/logout">Logout</a></li>
+    {% endif %}
+    </ul>
+  </nav>
+</header>
+
+{% block content %}
+{% endblock %}
+

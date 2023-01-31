@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+      .form-container {
+        background-color: #f2f2f2;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 50px auto;
+        max-width: 500px;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      label {
+        font-weight: bold;
+        color: #333;
+      }
+      input[type="text"], input[type="email"], textarea {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 14px;
+        margin-top: 8px;
+        margin-bottom: 20px;
+      }
+      input[type="submit"] {
+        background-color: #ff9900;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+        font-size: 16px;
+      }
+    </style>
+<body>
+    <div class="form-container">
+        {% if messages %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="float: right;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <label>Edit About</label>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+          <div class="form-group">
+            <label for="name">Phone:</label>
+            <input type="tel" id="name" name="phone" value="{{ data.phone }}" style="width: 400px;" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Email:</label>
+            <input type="email" id="name" name="email" value="{{ data.email }}" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Instegram Name:</label>
+            <input type="text" id="name" name="instegram" value="{{ data.instegram }}" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Instegram Link:</label>
+            <input type="url" id="name" name="link" value="{{ data.instegram_link }}" style="width: 400px;" required>
+          </div>
+          <div class="form-group">
+            <label for="name">City:</label>
+            <input type="text" id="name" name="city" value="{{ data.city }}" required>
+          </div>
+          <div class="form-group">
+            <img src="media/{{data.img}}" alt="current image" style="width: 100px; height: 140px;">
+          </div>
+          <div class="form-group">
+            <label for="message">Change Image</label>
+            <input class="form-control bg-white" type="file" id="formFile" accept="image/*" name="img">
+            <small>Change Image (1200*1500)</small>
+          </div>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.close').on('click', function() {
+            $(this).parent().remove();
+        });
+    });
+</script>
+</html>
+{% endblock %}
